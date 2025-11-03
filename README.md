@@ -1,6 +1,6 @@
 # ApiDockerExample
 
-Ejemplo de API contenedorizada con **Docker** y desplegada en **Railway**.  
+Ejemplo de API contenerizada con **Docker** y desplegada en **Railway**.  
 Este proyecto demuestra cómo crear, construir y desplegar una API REST de forma rápida utilizando **Docker**, **Docker Compose**, y **Railway** como plataforma de despliegue automatizado.
 
 ---
