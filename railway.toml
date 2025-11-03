@@ -6,3 +6,4 @@ dockerfilePath = "ApiDockerExample/Dockerfile"
 startCommand = "dotnet ApiDockerExample.dll"
 restartPolicyType = "always"
 healthcheckPath = "/health"
+sleep = false
