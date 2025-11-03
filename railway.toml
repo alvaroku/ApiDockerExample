@@ -1,8 +1,8 @@
 [build]
 builder = "dockerfile"
-dockerFilePath = "./ApiDockerExample/Dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "./ApiDockerExample"
+startCommand = "dotnet ApiDockerExample.dll"
 restartPolicyType = "always"
 healthcheckPath = "/health"
