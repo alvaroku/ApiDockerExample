@@ -9,7 +9,7 @@ Este proyecto demuestra cómo crear, construir y desplegar una API REST de forma
 
 - **Backend:** .NET 9
 - **Contenedor:** Docker
-- **Infraestructura:** Railway.app
+- **Infraestructura:** Railway
 - **Base de datos:** SQL Server
 - **CI/CD:** Railway Build & Deploy
 
