@@ -1,0 +1,8 @@
+[build]
+builder = "dockerfile"
+dockerFilePath = "./ApiDockerExample/Dockerfile"
+
+[deploy]
+startCommand = "./ApiDockerExample"
+restartPolicyType = "always"
+healthcheckPath = "/health"
