@@ -1,6 +1,6 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "Dockerfile"
+dockerfilePath = "ApiDockerExample/Dockerfile"
 
 [deploy]
 startCommand = "dotnet ApiDockerExample.dll"
