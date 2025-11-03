@@ -1,24 +1,23 @@
-# Esta fase se usa para compilar el proyecto de servicio
+# Etapa 1: build
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-RUN apt-get udpdate \ 
-	&& apt-get install -y --no-install-recommends \
-	clang zlib1g-dev
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ApiDockerExample/ApiDockerExample.csproj", "ApiDockerExample/"]
+
+# Copiar csproj y restaurar dependencias
+COPY ["ApiDockerExample/ApiDockerExample.csproj", "./ApiDockerExample/"]
 RUN dotnet restore "./ApiDockerExample/ApiDockerExample.csproj"
+
+# Copiar todo el código y compilar
 COPY . .
 WORKDIR "/src/ApiDockerExample"
-RUN dotnet build "./ApiDockerExample.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "ApiDockerExample.csproj" -c Release -o /app/build
 
-# Esta fase se usa para publicar el proyecto de servicio que se copiará en la fase final.
+# Etapa 2: publish
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ApiDockerExample.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=true
+RUN dotnet publish "ApiDockerExample.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Esta fase se usa en producción o cuando se ejecuta desde VS en modo normal (valor predeterminado cuando no se usa la configuración de depuración)
-FROM mcr.microsoft.com/dotnet/runtime-deps:9.0 AS final
+# Etapa 3: final
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
-EXPOSE 8080
 COPY --from=publish /app/publish .
-ENTRYPOINT ["*/ApiDockerExample"]
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "ApiDockerExample.dll"]
