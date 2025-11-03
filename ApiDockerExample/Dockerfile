@@ -1,5 +1,8 @@
 # Esta fase se usa para compilar el proyecto de servicio
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+RUN apt-get udpdate \ 
+	&& apt-get install -y --no-install-recommends \
+	clang zlib1g-dev
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ApiDockerExample/ApiDockerExample.csproj", "ApiDockerExample/"]
